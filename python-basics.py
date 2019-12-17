@@ -1,3 +1,4 @@
+import timeit
 import sys
 import math
 from random import random
@@ -25,6 +26,28 @@ str_mult = n * "The string"
 
 # Escape a full string:
 esc_str = r"A string with \ "
+
+# Make a NEW tuple from slice of a tuple
+t3 = 1, 2, 3, 4, 5, 6, 7
+t4 = t3[2:4]
+t5 = t3[:3]
+
+# Create new tuple by combining two tuples
+t7 = t3 + t5
+
+# Find index of first occurrence of element in tuple
+print(t7.index(2))
+
+# Count occurrences of element in tuple
+print(t7.count(2))
+
+# Tuple unpacking
+a, b, c = t5
+print("Val a: {}, val b: {}, val c: {}".format(*t5))
+
+# Tuples are faster than lists
+print(timeit.timeit('x=(1,2,3,4,5,6,7,8,9,10,11,12)', number=1000000))
+print(timeit.timeit('x=[1,2,3,4,5,6,7,8,9,10,11,12]', number=1000000))
 
 # Tuples and lists may contain mixed types
 tuple_mix = (1, "a", True, ("x", 2))
