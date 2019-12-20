@@ -45,6 +45,12 @@ print(t7.count(2))
 a, b, c = t5
 print("Val a: {}, val b: {}, val c: {}".format(*t5))
 
+lt = [(1, 2), (3, 4), (5, 6)]
+
+# F strings (templates) and tuple unpacking in loop
+for a, b in lt:
+    print(f"A is: {a} and B is: {b}")
+
 # Tuples are faster than lists
 print(timeit.timeit('x=(1,2,3,4,5,6,7,8,9,10,11,12)', number=1000000))
 print(timeit.timeit('x=[1,2,3,4,5,6,7,8,9,10,11,12]', number=1000000))
@@ -57,10 +63,11 @@ l1 = ["a", "b", 5]
 l2 = l1 + [1, 2]
 
 l3 = l2.extend([4, "a", 1.2])  # Append each element in the arguemtn to l2. Does not build a new list
-l4 = l1.append([1, 2, 3])  # Adds the argument as a whole to the list
-del (l2[1])  # Remove the second element
-"a list".split()  # Convert string to a list, space as separator
+l4 = l1.append([1, 2, 3])      # Adds the argument as a whole to the list
+del (l2[1])                    # Remove the second element
+"a list".split()               # Convert string to a list, space as separator
 "a,b,c,d".split(",")
+print(1 in l1)                 # Check if list contains item
 
 # Clone a list:
 l3 = l2[:]
@@ -76,7 +83,6 @@ sc = {str(i) for i in range(0, 10)}
 s2 = set([1, 2, 3, 4, 2, 3, 1])  # Convert a list into a set
 s1.add(False)  # Add an element to a set, if not there yet
 s1.remove("b")
-(1, 2) in s1  # Check if an element is in the set
 s1 & s2  # Intersection of s1 and s2
 s1.intersection(s2)
 su = s1 | s2  # Union of s1 and s2
@@ -84,15 +90,16 @@ s1.union(s2)
 s1.difference(s2)  # Difference (elements in s1 that are not in s2)
 s1.issuperset(s2)
 s1.issubset(s2)
+print((1, 2) in s1)  # Check if an element is in the set
 
 # Keys must be immutable and unique (e.g. can be tuples). Values can be mutable and be duplicated.
 d1 = {"key1": [1, 2, 3], "key2": s1, "key3": False}
 d2 = {i: str(i) for i in range(0, 10)}
-d1["key4"] = 5  # Add a new element
+d1["key4"] = 5    # Add a new element
 del (d1["key2"])  # Delete element with key2
-"key3" in d1  # Check if key is in the dictionary
-d1.keys()  # Get all keys
-d1.values()  # Get all values
+d1.keys()         # Get all keys
+d1.values()       # Get all values
+print("key3" in d1)      # Check if key is in the dictionary
 
 # Get address of a variable (not 100% reliable)
 hex(id(l2))
