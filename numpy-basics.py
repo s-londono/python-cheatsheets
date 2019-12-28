@@ -73,4 +73,22 @@ np_a6 = np_a5[np_a5 > 50]
 np_m9 = np.arange(50).reshape(5, 10)
 print(np_m9[1:3, 3:5])
 
+# Scalar operations
+np_a7 = np.zeros((5, 7)) + 5.25
+np_a8 = np_a7 ** 2
 
+# Array operations
+np_a9 = (np.arange(0, 5) * 2) + np.arange(10, 15)
+
+# Numpy handles errors gracefully, reports as warnings
+np_10 = np.arange(0, 5) / np.arange(0, 5)
+
+# Operations. Find in the documentation as Universal Functions
+print(np.sqrt(np_a7))
+print(np.exp(np_a7))
+print(np.max(np_a7))
+print(np.sin(np.arange(0.0, 1.0, 0.05)))
+
+# Statistics
+np_m5.sum()
+np_m5.std()
