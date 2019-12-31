@@ -45,6 +45,10 @@ np.random.seed(101)
 # Create a DataFrame specifying the row and column indexes
 df_1 = pd.DataFrame(data=randn(5, 4), index=['A', 'B', 'C', 'D', 'E'], columns=['W', 'X', 'Y', 'Z'])
 
+# Can create a DataFrame from a dictionary. Each key is interpreted as a column
+d_2 = {'A': [1, 2, 3], 'B': [5, 6, 7], 'C': [8, 9, 10], 'D': [11, 12, 13], 'E': [14, 15, 16]}
+df_2 = pd.DataFrame(d_2)
+
 # Retrieve column by label (as a Series)
 se_col_x = df_1['X']
 print(f"Type: {type(se_col_x)}. As string: \n{se_col_x}")
@@ -77,8 +81,7 @@ print(df_1.loc['A', 'X'])
 print(df_1.loc['B':'D', ['X', 'W']])
 print(df_1.loc['B':'D', 'X':'Y'])
 print(df_1.loc[['B', 'E'], 'X':'Y'])
-print(df_1.loc[['B', 'E'], 'X':'Y'])
-print(df_1.loc[['B', 'E'], 'X':'Y'])
+print(df_1.loc[:, 'X':'Y'])
 
 # With loc, boolean arrays can be used to select rows
 print(df_1.loc[df_1['X'] > 0])
@@ -95,7 +98,6 @@ print(df_1.iloc[[0, -1], -1])
 # Conditional selection. Comparison operators return boolean DataFrames (or Series), that can be used as selectors
 df_bool_1 = df_1 > 0
 print(df_1[df_bool_1])
-print(df_1['X'] < 1)
 
 # Using a condition on a Series returns only the matching rows (no NaN values). Result is a DataFrame
 # To select rows where a column matches a condition:
@@ -137,5 +139,6 @@ multi_ix_df.loc['G2'].loc[2]['B']
 
 # Cross section. Allows to select parts of the DataFrame and skip other parts. Example: get bot rows with subindex 1
 multi_ix_df.xs(1, level='Num')
+
 
 
