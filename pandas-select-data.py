@@ -75,4 +75,17 @@ print(multi_ix_df.loc['G2'].loc[2]['B'])
 # Cross section. Allows to select parts of the DataFrame and skip other parts. Example: get bot rows with subindex 1
 print(multi_ix_df.xs(1, level='Num'))
 
+# ADVANCED QUERYING
 
+df_2 = pd.DataFrame({'C1': ['alpha', 'bravo', 'charlie', 'delta'], 'C2': ['echo', 'foxtrot', 'golf', 'hotel'],
+                     'C3': ['india', 'juliet', 'kilo', 'lima']})
+
+# Select columns by regular expression
+print(df_2.filter(regex='.*l.*', axis=0))
+
+# Build a set of columns derived from existing columns of the DataFrame. By default resulting columns are numbered
+df_3 = df_2.apply(lambda r: (r['C1'].upper(), r['C2'] + '-' + r['C3']), axis=1, result_type='expand')
+
+# ... Or use a dictionary to specify the name of the resulting columns
+df_4 = df_2.apply(lambda r: {'Uppercase': r['C1'].upper(), 'Composite': (r['C2'] + '-' + r['C3'])},
+                  axis=1, result_type='expand')
