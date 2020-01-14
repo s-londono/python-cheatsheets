@@ -56,7 +56,11 @@ df_2 = pd.DataFrame(d_2)
 # General information about a DataFrame
 df_1.info()
 
+# Size of a DataFrame (tuple of rows and columns)
+print(df_1.shape)
+
 # Retrieve column by label (as a Series)
+# se_col_x = df_1.X
 se_col_x = df_1['X']
 print(f"Type: {type(se_col_x)}. As string: \n{se_col_x}")
 

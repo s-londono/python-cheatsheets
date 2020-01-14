@@ -1,5 +1,5 @@
-import numpy as np
 from numpy.random import randn
+import numpy as np
 import pandas as pd
 
 df_1 = pd.DataFrame(data=randn(5, 4), index=['A', 'B', 'C', 'D', 'E'], columns=['W', 'X', 'Y', 'Z'])
@@ -49,9 +49,23 @@ print(df_1[(df_1['X'] > 0) & (df_1['Y'] > 0)])
 # Get boolean DataFrame marking null values
 print(df_1.isnull())
 
+# Note that here neither not nor is will work. Must use ==
+print(df_1[df_1['X'].isnull() == False])
+
+# Get all columns that have no nulls
+print(set(df_1.columns[df_1.isnull().mean() == 0]))
+print(set(df_1.columns[np.sum(df_1.isnull()) == 0]))
+
 # For each colum/row, get the row/column that has the maximum value
 print(df_1.idxmax(axis=0))
 print(df_1.idxmax(axis=1))
+
+# Find element having the maximum value of a specific column
+print(df_1.loc[df_1['W'].argmax()])
+print(df_1.loc[df_1['W'].idxmax()])
+
+# Get value of an element
+print(df_1[df_1['X'] >= -50.0]['Y'].iat[0])
 
 # MULTIPLE INDEXES
 
@@ -89,3 +103,5 @@ df_3 = df_2.apply(lambda r: (r['C1'].upper(), r['C2'] + '-' + r['C3']), axis=1, 
 # ... Or use a dictionary to specify the name of the resulting columns
 df_4 = df_2.apply(lambda r: {'Uppercase': r['C1'].upper(), 'Composite': (r['C2'] + '-' + r['C3'])},
                   axis=1, result_type='expand')
+
+

@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # MISSING DATA
 
@@ -16,6 +17,9 @@ print(df_1.fillna(value='BAD'))
 
 # Fill NaNs in a column with the mean of that column
 print(df_1['A'].fillna(value=df_1['A'].mean()))
+
+# Rename columns
+print(df_1.rename(columns={'A': 'a', 'B': 'b'}, inplace=False))
 
 # GROUP-BY
 
@@ -88,8 +92,20 @@ print(df['col2'].unique())
 # Number of unique values in a specific column (alternative to len)
 print(df['col1'].nunique())
 
-# Count how many times each value present in a column appears in the column
+# Count how many times each value present in a column appears in the column. Very useful for categorical variables
 print(df['col2'].value_counts())
+
+# Plot proportion of values of items of a categorical column
+c1_vals = df_2['C1'].value_counts()
+(c1_vals/df_2.shape[0]).plot(kind="bar")
+plt.title("What kind of developer are you?")
+
+# Find columns having no NaNs
+print({e for e in df_1 if not df_1[e].hasnans})
+
+# Find columns with most of their values missing (more than 75% of values in column are NaNs)
+print({c for c in df_1 if (df_1[c].count() / df_1[c].size) < 0.25})
+print(set(df_1.columns[df_1.isnull().mean() > 0.75]))
 
 # Sort a dataframe by a specific column
 print(df.sort_values('col2'))
@@ -111,3 +127,47 @@ df_pv_3 = pd.DataFrame({'A': ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'],
                         'D': [1, 3, 2, 5, 4, 1]})
 
 df_pv_4 = df_pv_3.pivot_table(values='D', index=['A', 'B'], columns='C')
+
+# DROPPING ROWS AND COLUMNS
+
+data = {'name': ['Jason', 'Molly', 'Tina', 'Jake', 'Amy'],
+        'year': [2012, 2012, 2013, 2014, 2014],
+        'reports': [4, 24, 31, 2, 3]}
+
+df_drop = pd.DataFrame(data, index=['Cochice', 'Pima', 'Santa Cruz', 'Maricopa', 'Yuma'])
+
+# Drop an observation (row)
+df_drop.drop([['Choice', 'Pima']])
+
+# Drop a variable (column)
+df_drop.drop('reports', axis=1)
+
+# Drop rows that contain a certain value
+reduced_df = df_drop[df_drop.name != 'Tina']
+reduced_df6 = df_drop[np.isfinite(df_drop['name'])]
+
+# Drop rows by number
+reduced_df1 = df_drop.drop(df_drop.index[2])
+reduced_df2 = df_drop.drop(df_drop.index[1, 2, 4])
+reduced_df3 = df_drop.drop(df_drop.index[-2])
+
+# Relative select range (drop the rest). Here, keep top 3
+reduced_df4 = df_drop[:3]
+
+# Drop relative range (keep the rest). Here, drop bottom 3
+reduced_df5 = df_drop[:-3]
+
+# Drop all rows or columns that contain at least a null value (axis=0 rows, axis=1 columns)
+reduced_df7 = df_drop.dropna(axis=0)
+
+# Drop all rows or columns with all values null (axis=0 rows, axis=1 columns)
+reduced_df7 = df_drop.dropna(axis=0, how='all')
+
+# Drop all rows or columns with a specific column has null any values (axis=0 rows, axis=1 columns)
+reduced_df8 = df_drop.dropna(subset=['name'], axis=0)
+
+# Drop rows where several columns match a condition
+reduced_df8 = df_drop.dropna(subset=['name', 'year'], axis=0)
+# ...which is the same as the more convoluted way:
+reduced_df9 = df_drop[(pd.isnull(df_drop.iloc[:, 0]) == False) & (pd.isnull(df_drop.iloc[:, 2]) == False)]
+
