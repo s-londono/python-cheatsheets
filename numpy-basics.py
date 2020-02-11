@@ -92,3 +92,24 @@ print(np.sin(np.arange(0.0, 1.0, 0.05)))
 # Statistics
 np_m5.sum()
 np_m5.std()
+
+# Difference between two arrays
+np.setdiff1d([1, 2, 3, 4, 5], [1, 2, 3])
+
+# Intersection of arrays
+longer_list = np.arange(1, 100)
+shorter_list = np.array([30, 10, 22])
+
+recent_coding_books = np.intersect1d(longer_list, shorter_list)
+
+# Type conversion
+
+# Convert string to int
+gift_costs = np.array(["100", "200"]).astype(int)
+
+np_sins = np.sin(np.arange(0, 10))
+
+# Optimize using Numpy
+gift_costs = np.arange(0, 100, 5)
+total_price = (gift_costs[gift_costs < 25]).sum() * 1.08
+

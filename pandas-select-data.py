@@ -104,4 +104,7 @@ df_3 = df_2.apply(lambda r: (r['C1'].upper(), r['C2'] + '-' + r['C3']), axis=1, 
 df_4 = df_2.apply(lambda r: {'Uppercase': r['C1'].upper(), 'Composite': (r['C2'] + '-' + r['C3'])},
                   axis=1, result_type='expand')
 
+# Select columns of type
+cat_df = df.select_dtypes(include=['object'])
+
 

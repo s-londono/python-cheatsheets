@@ -105,6 +105,14 @@ print(df_1.apply(times2))
 # Also works with Series
 print(df_1['X'].apply(lambda x: x ** 2))
 
+# RENAME LABELS
+
+labels = list(df_1.columns)
+
+for label in labels:
+    label = label.replace(' ', '_')
+
+df_1.columns = labels
 
 
 

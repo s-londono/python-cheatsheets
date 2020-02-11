@@ -4,11 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Read dataset in DataFrame df
-df = pd.read_csv('data-science/resources/survey_results_public.csv')
+df = pd.read_csv('data_science/resources/survey_results_public.csv')
 df.head()
 
 # Read dataset schema in a DataFrame df2
-df2 = pd.read_csv('data-science/resources/survey_results_schema.csv')
+df2 = pd.read_csv('data_science/resources/survey_results_schema.csv')
 
 # Show the questions that where asked when filling in column CousinEducation
 list(df2[df2.Column == 'CousinEducation']['Question'])

@@ -12,6 +12,9 @@ df_1 = pd.DataFrame(d_1)
 print(df_1.dropna())
 print(df_1.dropna(axis=1))
 
+# Copy a DataFrame
+copy_df_1 = df_1.copy()
+
 # Fill NaNs with a specific value
 print(df_1.fillna(value='BAD'))
 
@@ -61,7 +64,7 @@ df3 = pd.DataFrame({'A': ['A8', 'A9', 'A10', 'A11'], 'B': ['B8', 'B9', 'B10', 'B
 # Concatenation basically glues together DataFrames. Keep in mind that dimensions should match along the axis
 # you are concatenating on. You can use pd.concat and pass in a list of DataFrames to concatenate together. By
 # default concatenates on axis 0 (rows)
-print(pd.concat([df1, df2, df3]))
+print(pd.concat([df1, df2, df3], axis=1))
 
 left = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'], 'A': ['A0', 'A1', 'A2', 'A3'], 'B': ['B0', 'B1', 'B2', 'B3']})
 
@@ -110,6 +113,10 @@ print(set(df_1.columns[df_1.isnull().mean() > 0.75]))
 # Sort a dataframe by a specific column
 print(df.sort_values('col2'))
 print(df.sort_values(by=['col2', 'col3'], ascending=True))
+
+# Note that not using copy results in a strange warning. Slicing somehow causes the result to be a view and not a copy
+df_copy_res = df_1[["ArrTime", "CRSArrTime", "ArrDelay"]].copy()
+df_copy_res["DiffArrTime"] = (df_copy_res["ArrTime"] - df_copy_res["CRSArrTime"])
 
 # PIVOTING
 # Transform a DataFrame by taking the values of specific sets of columns as indices, columns and values.
@@ -171,3 +178,22 @@ reduced_df8 = df_drop.dropna(subset=['name', 'year'], axis=0)
 # ...which is the same as the more convoluted way:
 reduced_df9 = df_drop[(pd.isnull(df_drop.iloc[:, 0]) == False) & (pd.isnull(df_drop.iloc[:, 2]) == False)]
 
+# IMPUTING COLUMNS
+
+# Impute missing entries on each column using the mode of the column
+fill_mode = lambda col: col.fillna(col.mode()[0])
+df_drop.apply(fill_mode, axis=0)
+
+# IMPUTING USING A COMPUTED SERIES
+
+df_data = pd.DataFrame({"a": [100, 200, 300], "b": [2, np.nan, 3], "c": [np.nan, 4, np.nan]})
+sr_fill = df_data["a"] / 5.0
+df_data.apply(lambda c: c.fillna(sr_fill))
+
+df_data["b"].fillna(sr_fill, inplace=True)
+
+# Transform a column
+df_data.loc[:, "a"] = df_data["a"].transform(lambda a: a ** 2)
+
+# Convert data types (can use data types from np.dtypes and Python data types)
+df_data = df_data.astype({"a": "str", "b": "int64", "c": "float64"})

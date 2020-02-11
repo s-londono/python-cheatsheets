@@ -56,6 +56,8 @@ fig.show()
 # Empty canvas of 1 by 2 subplots
 fig, axes = plt.subplots(nrows=1, ncols=2)
 
+fig.subplots_adjust(hspace=.5)
+
 # Now use the axes object to add stuff to plot. Axes is an array. Can be iterated and indexed
 axes[0].plot(x, y, 'r')
 axes[0].set_xlabel('x')

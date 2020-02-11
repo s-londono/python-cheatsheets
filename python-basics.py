@@ -1,3 +1,4 @@
+import time
 import timeit
 import sys
 import math
@@ -6,6 +7,9 @@ import numpy as np
 
 # Check Python version:
 print(sys.version)
+
+# Print module paths
+print(sys.path)
 
 # Get information about the float representation of the current environment:
 float_info = sys.float_info
@@ -91,6 +95,11 @@ s1.difference(s2)  # Difference (elements in s1 that are not in s2)
 s1.issuperset(s2)
 s1.issubset(s2)
 print((1, 2) in s1)  # Check if an element is in the set
+
+# Intersection of lists using sets
+longer_list = list(range(1, 100))
+shorter_list = [30, 10, 22]
+list_intersection = set(longer_list).intersection(shorter_list)
 
 # Keys must be immutable and unique (e.g. can be tuples). Values can be mutable and be duplicated.
 d1 = {"key1": [1, 2, 3], "key2": s1, "key3": False}
@@ -193,4 +202,21 @@ class Rectangle(object):
         return self.calc1
 
 
+# Efficient concatenation
+# https://waymoot.org/home/python_string/
+def concat_man6():
+    return "".join([f"{num}" for num in range(1, 1000)])
 
+
+# Calculate runtime
+
+start = time.time()
+recent_coding_books = []
+
+for i in range(1, 100):
+    pass
+
+print('Duration: {} seconds'.format(time.time() - start))
+
+# Using timeit
+print(timeit.timeit('x=(1,2,3,4,5,6,7,8,9,10,11,12)', number=1000000))
