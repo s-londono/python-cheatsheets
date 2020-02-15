@@ -53,7 +53,9 @@ class Gaussian(Distribution):
         else:
             n = len(self.data)
 
-        mean = self.mean
+        print(f"N IS {n} SAMPLE {sample}")
+
+        mean = self.calculate_mean()
 
         sigma = 0
 
@@ -66,31 +68,20 @@ class Gaussian(Distribution):
 
         return self.stdev
 
-    def read_data_file(self, file_name, sample=True):
-
-        """Function to read in data from a txt file. The txt file should have
-        one number (float) per line. The numbers are stored in the data attribute.
-        After reading in the file, the mean and standard deviation are calculated
+    def replace_stats_with_data(self):
+        """Function to calculate p and n from the data set. The function updates the p and n variables of the object.
 
         Args:
-          file_name (string): name of a file to read from
+            file_name: name of the file to read the data from. Should contains 0s and 1s only
 
         Returns:
-          None
+            float: the p value
+            float: the n value
 
         """
-
-        with open(file_name) as file:
-            data_list = []
-            line = file.readline()
-            while line:
-                data_list.append(int(line))
-                line = file.readline()
-        file.close()
-
-        self.data = data_list
-        self.mean = self.calculate_mean()
-        self.stdev = self.calculate_stdev(sample)
+        # Update mean and standard deviation
+        self.calculate_mean()
+        self.calculate_stdev()
 
     def plot_histogram(self):
         """Function to output a histogram of the instance variable data using
@@ -103,7 +94,7 @@ class Gaussian(Distribution):
           None
         """
         plt.hist(self.data)
-        plt.title('Histogram of Data')
+        plt.title('Histogram of Data (Gaussian)')
         plt.xlabel('data')
         plt.ylabel('count')
 
@@ -133,10 +124,6 @@ class Gaussian(Distribution):
           list: y values for the pdf plot
 
         """
-
-        mu = self.mean
-        sigma = self.stdev
-
         min_range = min(self.data)
         max_range = max(self.data)
 
