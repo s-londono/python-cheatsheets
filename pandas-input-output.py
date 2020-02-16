@@ -8,7 +8,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 # Read CSV file
-df_csv = pd.read_csv('resources/example')
+df_csv = pd.read_csv('resources/example', skiprows=0)
 
 # Write CSV file (use index=False to avoid writing the sequential index introduced by Pandas)
 df_csv.to_csv('resources/my_output', index=False)

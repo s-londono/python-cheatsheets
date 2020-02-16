@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple World Bank Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            width: 100%;
+        }
+
+        #charts-section {
+            width: 100%;
+        }
+
+        #charts-section div {
+            float: left;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>THE DATASET</h1>
+    <!-- The next two paragraphs are not necessary. Just for visualization purposes -->
+    <p>{{ids}}</p>
+    <p>{{figuresJSON}}</p>
+
+    <div id="charts-section">
+        {% for chart_id in ids %}
+            <div id="{{chart_id}}"></div>
+        {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+        // Plot the figures. ID must match the div ID above in the HTML
+        var figures = {{figuresJSON | safe}};
+        var ids = {{ids | safe}};
+
+        for (var i in figures) {
+            Plotly.plot(ids[i],
+                figures[i].data,
+                figures[i].layout || {});
+        }
+    </script>
+</body>
+</html>

@@ -24,6 +24,9 @@ print(df_1['A'].fillna(value=df_1['A'].mean()))
 # Rename columns
 print(df_1.rename(columns={'A': 'a', 'B': 'b'}, inplace=False))
 
+# Rename columns directly
+df_1.columns = ['A1', 'A2', 'A3']
+
 # GROUP-BY
 
 df_2 = pd.DataFrame({'Company': ['GOOG', 'GOOG', 'MSFT', 'MSFT', 'APPL', 'APPL'],
@@ -135,6 +138,16 @@ df_pv_3 = pd.DataFrame({'A': ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'],
 
 df_pv_4 = df_pv_3.pivot_table(values='D', index=['A', 'B'], columns='C')
 
+# MELTING
+# Unpivot a DataFrame from wide to long format, optionally leaving identifiers set.
+df_to_melt = pd.DataFrame({'Country': {0: 'US', 1: 'DE', 2: 'FR'}, '2000': {0: 0.5, 1: 0.2, 2: 0.0},
+                           '2001': {0: 0.7, 1: 1.2, 2: 3.0}, 'AUX': {0: 4, 1: 1, 2: 7}})
+
+# melt year columns  and convert year to date time
+df_melt2 = df_to_melt.melt(id_vars=['Country'], value_vars=['2000', '2001'])
+df_melt2.columns = ['country', 'year', 'variable']
+df_melt2['year'] = df_melt2['year'].astype('datetime64[ns]').dt.year
+
 # DROPPING ROWS AND COLUMNS
 
 data = {'name': ['Jason', 'Molly', 'Tina', 'Jake', 'Amy'],
@@ -197,3 +210,5 @@ df_data.loc[:, "a"] = df_data["a"].transform(lambda a: a ** 2)
 
 # Convert data types (can use data types from np.dtypes and Python data types)
 df_data = df_data.astype({"a": "str", "b": "int64", "c": "float64"})
+
+df_melt2['year'] = df_melt2['year'].astype('datetime64[ns]').dt.year

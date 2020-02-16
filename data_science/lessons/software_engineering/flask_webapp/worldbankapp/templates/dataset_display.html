@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Bank App</title>
+</head>
+<body>
+    <h1>THE DATASET</h1>
+    <!-- Flask comes with a template engine called Jinja -->
+    {{ data_set }}
+    {% for tuple in data_set %}
+        <p>{{ tuple }}</p>
+    {% endfor % }
+</body>
+</html>
