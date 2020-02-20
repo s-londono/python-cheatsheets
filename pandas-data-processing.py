@@ -101,6 +101,9 @@ print(df['col1'].nunique())
 # Count how many times each value present in a column appears in the column. Very useful for categorical variables
 print(df['col2'].value_counts())
 
+# Drop duplicates
+df_dedupl = df.drop_duplicates()
+
 # Plot proportion of values of items of a categorical column
 c1_vals = df_2['C1'].value_counts()
 (c1_vals/df_2.shape[0]).plot(kind="bar")
