@@ -49,7 +49,8 @@ print(df_1[(df_1['X'] > 0) & (df_1['Y'] > 0)])
 # Get boolean DataFrame marking null values
 print(df_1.isnull())
 
-# Note that here neither not nor is will work. Must use ==
+# Note that here neither not nor is will work. Must use ~ (or == False)
+print(df_1[~df_1['X'].isnull()])
 print(df_1[df_1['X'].isnull() == False])
 
 # Get all columns that have no nulls

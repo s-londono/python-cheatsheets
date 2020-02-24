@@ -114,6 +114,20 @@ for label in labels:
 
 df_1.columns = labels
 
+# ACCESSORS
+# Pandas provides dtype-specific methods under various accessors.
+# These are separate namespaces within Series that only apply to specific data types.
+# https://pandas.pydata.org/pandas-docs/stable/reference/series.html#accessors
 
+# String methods
+df_strs = pd.DataFrame({"A": ["a1 (suffix)", "a2 (suffix)", "a3 (suffix)"], "B": ["b1", "b2", "b3"]})
 
+df_strs["A"] = df_strs["A"].str.replace(r" \([a-zA-Z]+\)", "")
+df_strs["A"] = df_strs["A"].str.upper()
 
+# DateTime methods
+df_dates = pd.DataFrame({"C": ["1990-12-30 00:00:00-05:00", "1992-05-14 19:20:00-05:00"], "D": [32, 45]})
+# Convert string (object) column to datetime
+df_dates["C"] = pd.to_datetime(df_dates["C"])
+
+df_dates["Y"] = df_dates.C.dt.year

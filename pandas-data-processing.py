@@ -36,6 +36,9 @@ df_2 = pd.DataFrame({'Company': ['GOOG', 'GOOG', 'MSFT', 'MSFT', 'APPL', 'APPL']
 # Group by a specific column. Creates a group-by object
 gb_1 = df_2.groupby('Company')
 
+# Note that its possible to get a specific column from a group to operate on it
+count_unique_persons_x_company = gb_1['Person'].nunique()
+
 # Perform an aggregate operation on groups defined by the group-by object. Result is a DataFrame
 print(gb_1.mean())
 print(gb_1.sum())
