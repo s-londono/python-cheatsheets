@@ -1,7 +1,5 @@
 import os
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 if not os.getcwd().endswith("etl"):
     os.chdir("./data_science/lessons/etl")

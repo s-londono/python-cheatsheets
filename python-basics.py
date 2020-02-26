@@ -67,22 +67,23 @@ l1 = ["a", "b", 5]
 l2 = l1 + [1, 2]
 
 l3 = l2.extend([4, "a", 1.2])  # Append each element in the arguemtn to l2. Does not build a new list
-l4 = l1.append([1, 2, 3])      # Adds the argument as a whole to the list
-del (l2[1])                    # Remove the second element
-"a list".split()               # Convert string to a list, space as separator
+l4 = l1.append([1, 2, 3])  # Adds the argument as a whole to the list
+del (l2[1])  # Remove the second element
+"a list".split()  # Convert string to a list, space as separator
 "a,b,c,d".split(",")
-print(1 in l1)                 # Check if list contains item
+print(1 in l1)  # Check if list contains item
 
 # Clone a list:
 l3 = l2[:]
 
 # Iterable functions (apply to tuples, lists, sets)
-sorted(l2)  # Returns a new list or tuple
-l1.sort()  # Does not create a new list
+l_sort = [10, 9, 8, 4]
+sorted(l_sort)  # Returns a new list or tuple
+l_sort.sort()  # Does not create a new list
 
 # Sets are a type of collection. Support elements of different data types. Elements are unordered.
 # An element can be contained only once.
-s1 = {"b", (1, 2), ["a", True]}
+s1 = {"b", (1, 2), ("a", True)}
 sc = {str(i) for i in range(0, 10)}
 s2 = set([1, 2, 3, 4, 2, 3, 1])  # Convert a list into a set
 s1.add(False)  # Add an element to a set, if not there yet
@@ -104,11 +105,11 @@ list_intersection = set(longer_list).intersection(shorter_list)
 # Keys must be immutable and unique (e.g. can be tuples). Values can be mutable and be duplicated.
 d1 = {"key1": [1, 2, 3], "key2": s1, "key3": False}
 d2 = {i: str(i) for i in range(0, 10)}
-d1["key4"] = 5    # Add a new element
+d1["key4"] = 5  # Add a new element
 del (d1["key2"])  # Delete element with key2
-d1.keys()         # Get all keys
-d1.values()       # Get all values
-print("key3" in d1)      # Check if key is in the dictionary
+d1.keys()  # Get all keys
+d1.values()  # Get all values
+print("key3" in d1)  # Check if key is in the dictionary
 
 # Get address of a variable (not 100% reliable)
 hex(id(l2))
@@ -198,7 +199,7 @@ class Rectangle(object):
         self.attrn = attrn
 
     def method1(self, arg1, argn="defaultvaln"):
-        self.calc1 = arg1**argn + 10
+        self.calc1 = arg1 ** argn + 10
         return self.calc1
 
 
@@ -220,3 +221,19 @@ print('Duration: {} seconds'.format(time.time() - start))
 
 # Using timeit
 print(timeit.timeit('x=(1,2,3,4,5,6,7,8,9,10,11,12)', number=1000000))
+
+
+# GENERATORS
+
+# Generators process information one at a time. Are useful for data that are too large to fit in RAM
+def my_gen(x, degree):
+    cur_i = 0
+    while cur_i <= degree:
+        yield x ** degree
+        print(f"Generated degree: {cur_i}")
+        cur_i += 1
+
+
+for p in my_gen(5, 10):
+    print(f"Ready...")
+    print(f"Got {p}")

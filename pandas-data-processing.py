@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 d_1 = {'A': [1, 2, np.nan], 'B': [5, np.nan, np.nan], 'C': [1, 2, 3]}
 df_1 = pd.DataFrame(d_1)
 
+# Replace all matching values with another value
+df_1.replace("", np.nan)
+
 # Remove rows/columns containing one or more NaN values. The thres argument controls how many NaN values may a
 # row/column have in order to be kept
 print(df_1.dropna())
