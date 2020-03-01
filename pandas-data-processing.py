@@ -72,7 +72,8 @@ df3 = pd.DataFrame({'A': ['A8', 'A9', 'A10', 'A11'], 'B': ['B8', 'B9', 'B10', 'B
 
 # Concatenation basically glues together DataFrames. Keep in mind that dimensions should match along the axis
 # you are concatenating on. You can use pd.concat and pass in a list of DataFrames to concatenate together. By
-# default concatenates on axis 0 (rows)
+# default concatenates on axis 0 (rows).
+# Can be viewed as a simplified version of merge
 print(pd.concat([df1, df2, df3], axis=1))
 
 left = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'], 'A': ['A0', 'A1', 'A2', 'A3'], 'B': ['B0', 'B1', 'B2', 'B3']})
@@ -87,7 +88,9 @@ left_1 = pd.DataFrame({'A': ['A0', 'A1', 'A2'], 'B': ['B0', 'B1', 'B2']}, index=
 right_1 = pd.DataFrame({'C': ['C0', 'C2', 'C3'], 'D': ['D0', 'D2', 'D3']}, index=['K0', 'K2', 'K3'])
 
 # Joining is a convenient method for combining the columns of two potentially differently-indexed DataFrames
-# into a single result DataFrame. Joins DataFrames by their indices. Can also use argument 'how'
+# into a single result DataFrame. Always joins on the index of the DataFrames passed as argument. By default, joins
+# both DataFrames by their indices. Can also use argument 'how'
+# Can be viewed as a shorthand version of merge
 print(left_1.join(right_1))
 print(left_1.join(right_1, how='outer'))
 
