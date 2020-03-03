@@ -32,13 +32,11 @@ lemmatizer = WordNetLemmatizer()
 
 
 def tokenize(text):
-    # normalize case and remove punctuation
+    # Normalize case and remove punctuation
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
 
-    # tokenize text
+    # Tokenize text, remove stop words and lemmatize
     tokens = word_tokenize(text)
-
-    # lemmatize andremove stop words
     tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
 
     return tokens

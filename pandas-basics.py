@@ -124,6 +124,7 @@ df_strs = pd.DataFrame({"A": ["a1 (suffix)", "a2 (suffix)", "a3 (suffix)"], "B":
 
 df_strs["A"] = df_strs["A"].str.replace(r" \([a-zA-Z]+\)", "")
 df_strs["A"] = df_strs["A"].str.upper()
+df_strs["A"] = df_strs["A"].str[-1:]
 
 # DateTime methods
 df_dates = pd.DataFrame({"C": ["1990-12-30 00:00:00-05:00", "1992-05-14 19:20:00-05:00"], "D": [32, 45]})

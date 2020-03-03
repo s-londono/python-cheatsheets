@@ -20,13 +20,6 @@ print(words)
 
 # Remove stop words
 words = [w for w in words if w not in stopwords.words("english")]
-print(words)
-
-# Stemming
-
-# Reduce words to their stems
-stemmed = [PorterStemmer().stem(w) for w in words]
-print(stemmed)
 
 # Lemmatizing
 
@@ -35,5 +28,12 @@ lemmed = [WordNetLemmatizer().lemmatize(w) for w in words]
 print(lemmed)
 
 # Lemmatize verbs by specifying pos
+print(words)
+
+# Stemming
+
+# Reduce words to their stems
+stemmed = [PorterStemmer().stem(w) for w in words]
+print(stemmed)
 lemmed = [WordNetLemmatizer().lemmatize(w, pos='v') for w in lemmed]
 print(lemmed)

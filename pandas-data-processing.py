@@ -57,6 +57,8 @@ gb_1.describe()
 gb_1.describe().transpose()
 
 # MERGE, JOIN, CANCATENATE
+# https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html
+# https://pandas.pydata.org/pandas-docs/stable/user_guide/cookbook.html#cookbook-merge
 
 df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2', 'A3'], 'B': ['B0', 'B1', 'B2', 'B3'],
                     'C': ['C0', 'C1', 'C2', 'C3'], 'D': ['D0', 'D1', 'D2', 'D3']},
@@ -109,6 +111,9 @@ print(df['col1'].nunique())
 
 # Count how many times each value present in a column appears in the column. Very useful for categorical variables
 print(df['col2'].value_counts())
+
+# Find and count duplicates
+df.duplicated().sum()
 
 # Drop duplicates
 df_dedupl = df.drop_duplicates()
