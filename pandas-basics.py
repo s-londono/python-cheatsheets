@@ -67,6 +67,10 @@ print(f"Type: {type(se_col_x)}. As string: \n{se_col_x}")
 # Add column to a DataFrame, as a sum of existing columns
 df_1['SumXY'] = df_1['X'] + df_1['Y']
 
+# Use loc to avoid warning: "A value is trying to be set on a copy of a slice from a DataFrame"
+# https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html
+sector.loc[sel_energy_sectors, 'sector1_aggregates'] = 'Energy'
+
 # Remove a row (axis by default is 0). Does not modify the DataFrame
 df_1.drop('E')
 
