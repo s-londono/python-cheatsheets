@@ -90,7 +90,8 @@ def build_model():
         )
     }
 
-    cv = GridSearchCV(pipeline, param_grid=parameters)
+    # IMPORTANT: set n_jobs to -1 to use all available processors
+    cv = GridSearchCV(pipeline, param_grid=parameters, n_jobs=-1)
 
     return cv
 

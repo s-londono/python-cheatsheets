@@ -35,5 +35,5 @@ print(words)
 # Reduce words to their stems
 stemmed = [PorterStemmer().stem(w) for w in words]
 print(stemmed)
-lemmed = [WordNetLemmatizer().lemmatize(w, pos='v') for w in lemmed]
+lemmed = [WordNetLemmatizer().lemmatize(w, pos='v') for w in words]
 print(lemmed)
