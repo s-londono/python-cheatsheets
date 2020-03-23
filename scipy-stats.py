@@ -15,6 +15,7 @@ rb = stats.binom(n, p)
 # Generate random numbers
 rb.rvs(size=10)
 rb.rvs(size=(5, 10))
+stats.binom.rvs(n, p, size=3)
 
 # Compute Moments (m: mean, v: variance, s: skey, k: kurtosis)
 rb.mean()
