@@ -144,6 +144,8 @@ print((samples >= (p_click[1] - p_click[0])).mean())
 # conservative than the p-value that a simulation will usually imply. Computing the z-score and resulting p-value
 # without a continuity correction should be closer to the simulation's outcomes, though slightly more optimistic
 # about there being a statistical difference between groups
+# WARN: The variance of the distribution is the sum of the variance of the individual distributions
+#       Standard Error is: s / sqrt(n), with s the standard deviation of the distribution
 
 # Get number of trials and overall 'success' rate under null hypothesis
 n_control = data.groupby('condition').size()[0]
