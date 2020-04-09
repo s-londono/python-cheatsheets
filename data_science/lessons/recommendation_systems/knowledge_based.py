@@ -33,8 +33,13 @@ movie_stats["rating_count"] = movie_groups["rating"].count()
 movie_stats["last_rating_time"] = movie_groups["timestamp"].max()
 
 # Do not consider movies with less than 5 ratings
-candidate_movie_stats = movie_stats[movie_stats["rating_count"] > 4]
+candidate_movies = movie_stats[movie_stats["rating_count"] > 4].copy()
 
+candidate_movies.sort_values(by=["rating_avg", "rating_count", "last_rating_time"], ascending=False, inplace=True)
+
+# Another option is to join movies with ratings
+movies.set_index("movie_id")
+ranked_movies = movies.join(movie_stats)
 
 def popular_recommendations(user_id, n_top):
     """
@@ -44,10 +49,49 @@ def popular_recommendations(user_id, n_top):
     OUTPUT:
     top_movies - a list of the n_top recommended movies by movie title in order best to worst
     """
-    # Do stuff
-    movie_stats.loc[328107, "rating_avg"]
-
-    top_movies = None
+    top_movies = movies[movies["movie_id"].isin(candidate_movies.iloc[0:n_top].index)]
 
     return top_movies  # a list of the n_top movies as recommended
 
+
+popular_recommendations(1, 10)
+
+
+def popular_recommendations_filtered(user_id, n_top, years=None, genres=None):
+    """
+    INPUT:
+    user_id - the user_id of the individual you are making recommendations for
+    n_top - an integer of the number recommendations you want back
+    years - filter by year
+    genres - filter by genre
+    OUTPUT:
+    top_movies - a list of the n_top recommended movies by movie title in order best to worst
+    """
+    fltrd_movies = movies
+
+    if years is not None:
+        fltrd_movies = movies[movies["date"].astype(np.str).isin(years)]
+
+    if genres is not None:
+        fltrd_movies = movies[movies["genre"].isin(genres)]
+
+    fltrd_movie_groups = reviews[reviews["movie_id"].isin(fltrd_movies["movie_id"])].groupby("movie_id")
+    fltrd_movie_stats = pd.DataFrame(index=fltrd_movie_groups.indices)
+    fltrd_movie_stats["rating_avg"] = fltrd_movie_groups["rating"].mean()
+    fltrd_movie_stats["rating_count"] = fltrd_movie_groups["rating"].count()
+    fltrd_movie_stats["last_rating_time"] = fltrd_movie_groups["timestamp"].max()
+
+    # Do not consider movies with less than 5 ratings
+    fltrd_candidate_movies = fltrd_movie_stats[fltrd_movie_stats["rating_count"] > 4].copy()
+
+    fltrd_candidate_movies.sort_values(by=["rating_avg", "rating_count", "last_rating_time"],
+                                       ascending=False, inplace=True)
+
+    top_movies = fltrd_movies[fltrd_movies["movie_id"].isin(fltrd_candidate_movies.iloc[0:n_top].index)]
+
+    return top_movies
+
+
+popular_recommendations_filtered('1', 20, years=['2015', '2016', '2017', '2018'], genres=['History'])
+
+res = popular_recommendations_filtered('1', 20)

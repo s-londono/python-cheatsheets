@@ -91,7 +91,7 @@ print(df_1.index)
 # Reset index (convert to numerical). Does not occur in place by default. Use inplace argument to do so
 df_1.reset_index()
 
-# Switch index to a specific column
+# Switch index to a specific column. This is very useful for joining
 new_index = 'CA NY WY OR CO'.split()
 df_1['State'] = new_index
 print(df_1.set_index('State'))

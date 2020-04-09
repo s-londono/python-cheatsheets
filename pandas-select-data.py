@@ -46,6 +46,9 @@ print(df_1.loc[:, df_1.loc['B'] < 1])
 # Multiple conditions (use & instead of and, | instead of or)
 print(df_1[(df_1['X'] > 0) & (df_1['Y'] > 0)])
 
+# Is in, contains operator
+print(df_1[df_1['X'].isin([1, 2])])
+
 # Get boolean DataFrame marking null values
 print(df_1.isnull())
 
