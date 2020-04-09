@@ -76,6 +76,7 @@ df_1.drop('E')
 
 # Remove a column. Does not modify the DataFrame
 df_1.drop('Z', axis=1)
+del df_1['Z']
 
 # To modify the DataFrame use inplace (applies to many methods in Pandas)
 df_1.drop('Z', axis=1, inplace=True)
@@ -136,3 +137,6 @@ df_dates = pd.DataFrame({"C": ["1990-12-30 00:00:00-05:00", "1992-05-14 19:20:00
 df_dates["C"] = pd.to_datetime(df_dates["C"])
 
 df_dates["Y"] = df_dates.C.dt.year
+
+# Create a date out of Epoch timestamp (in milliseconds)
+df_dates["date"] = pd.to_datetime(df_dates["D"], unit="ms")
