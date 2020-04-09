@@ -32,6 +32,9 @@ movie_stats["rating_avg"] = movie_groups["rating"].mean()
 movie_stats["rating_count"] = movie_groups["rating"].count()
 movie_stats["last_rating_time"] = movie_groups["timestamp"].max()
 
+# Do not consider movies with less than 5 ratings
+candidate_movie_stats = movie_stats[movie_stats["rating_count"] > 4]
+
 
 def popular_recommendations(user_id, n_top):
     """
