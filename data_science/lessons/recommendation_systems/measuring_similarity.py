@@ -87,9 +87,43 @@ def kendalls_tau(x, y):
     return (2 * sum_concordants) / (n * (n - 1))
 
 
-kendalls_tau(play_data['x1'], play_data['x2'])
-kendalls_tau(play_data['x1'], play_data['x3'])
+# Comparing values of these similarity measures
+cols = play_data.columns
 
-kendalltau(play_data['x1'], play_data['x2'])
+for i in range(0, cols.size - 1):
+    for j in range(i, cols.size):
+        pears_val = pearson_corr(play_data[cols[i]], play_data[cols[j]])
+        spear_val = corr_spearman(play_data[cols[i]], play_data[cols[j]])
+        kendl_val = kendalls_tau(play_data[cols[i]], play_data[cols[j]])
 
-assert kendalls_tau(play_data['x1'], play_data['x3']) == kendalltau(play_data['x1'], play_data['x3'])[0], 'Oops!  The correlation between the first two columns should be 0, but your function returned {}.'.format(kendalls_tau(play_data['x1'], play_data['x2']))
+        print(f"({cols[i]}, {cols[j]}) - Spearman: {round(spear_val, 3)} vs. Kendall: {round(spear_val, 3)}")
+        print(f"({cols[i]}, {cols[j]}) - Spearman: {round(spear_val, 3)} vs. Pearson: {round(pears_val, 3)}")
+        print(f"({cols[i]}, {cols[j]}) - Pearson: {round(pears_val, 3)} vs. Kendall: {round(spear_val, 3)}")
+
+
+def eucl_dist(x, y):
+    """
+    INPUT
+    x - an array of matching length to array y
+    y - an array of matching length to array x
+    OUTPUT
+    euc - the euclidean distance between x and y
+    """
+    x = np.array(x.tolist())
+    y = np.array(y.tolist())
+
+    return np.sqrt(((y - x) ** 2).sum())
+
+
+def manhat_dist(x, y):
+    """
+    INPUT
+    x - an array of matching length to array y
+    y - an array of matching length to array x
+    OUTPUT
+    manhat - the manhattan distance between x and y
+    """
+    x = np.array(x.tolist())
+    y = np.array(y.tolist())
+
+    return np.absolute(y - x).sum()
