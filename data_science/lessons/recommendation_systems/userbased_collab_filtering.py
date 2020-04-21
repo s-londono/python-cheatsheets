@@ -118,10 +118,10 @@ def compute_correlation(user1, user2):
 # Note that this results in NaN because ratings for user_1 have Std. Deviation 0!
 compute_correlation(2, 104)
 
+
 # The aforesaid occurs for many users, thus making the correlation coefficient less than optimal for relating
 # user ratings to one another, we could instead calculate the euclidean distance between the ratings
 # For that reason, could instead calculate the euclidean distance between the ratings
-
 
 def compute_euclidean_dist(user1, user2):
     """
@@ -132,5 +132,19 @@ def compute_euclidean_dist(user1, user2):
     the euclidean distance between user1 and user2
     """
     # Find the movies rated by both users
-    dist = 0
-    return dist
+    movies_rated_user_1 = set(movies_to_analyze[user1])
+    movies_rated_user_2 = set(movies_to_analyze[user2])
+    movies_rated_both = [rating for rating in movies_rated_user_1.intersection(movies_rated_user_2)]
+
+    # If not enough ratings of the same movies deem users as not correlated at all
+    if len(movies_rated_both) < 1:
+        return 0.0
+
+    # Build the vectors of movie ratings for each user, made up of the ratings each user gave to the movies both rated
+    ratings_vector1 = np.array(user_by_movie.loc[user1, movies_rated_both].tolist())
+    ratings_vector2 = np.array(user_by_movie.loc[user2, movies_rated_both].tolist())
+
+    return np.linalg.norm(ratings_vector1 - ratings_vector2)
+
+
+
