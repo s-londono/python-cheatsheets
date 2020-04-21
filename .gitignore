@@ -130,3 +130,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Specific data files that are too big
+**/recommendation_systems/data/dists.p

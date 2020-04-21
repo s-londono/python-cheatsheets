@@ -71,6 +71,9 @@ print(df_1.loc[df_1['W'].idxmax()])
 # Get value of an element
 print(df_1[df_1['X'] >= -50.0]['Y'].iat[0])
 
+# Query a DataFrame using a boolean expression. Enclose names of columns that contain spaces in backtick quotes (`)
+print(df_1.query("W > X"))
+
 # MULTIPLE INDEXES
 
 outside = ['G1', 'G1', 'G1', 'G2', 'G2', 'G2']

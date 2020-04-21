@@ -147,4 +147,82 @@ def compute_euclidean_dist(user1, user2):
     return np.linalg.norm(ratings_vector1 - ratings_vector2)
 
 
+compute_euclidean_dist(2, 417)
+
+# 3. USE THE NEAREST NEIGHBORS TO MAKE RECOMMENDATIONS
+
+# Read in solution euclidean distances
+df_dists = pd.read_pickle("data/dists.p")
+
+# DataFrame df_dists measures the Euclidean Distance between each user and every other user.
+# Use df_dists to find the users that are 'nearest' each user. Then find the movies the closest neighbors have
+# liked, to recommend to each user
+
+def find_closest_neighbors(user):
+    """
+    INPUT:
+        user - (int) the user_id of the individual you want to find the closest users
+    OUTPUT:
+        closest_neighbors - an array of the id's of the users sorted from closest to farthest away
+    """
+    # I treated ties as arbitrary and just kept whichever was easiest to keep using the head method
+    # You might choose to do something less hand wavy - order the neighbors
+
+    return closest_neighbors
+
+
+def movies_liked(user_id, min_rating=7):
+    """
+    INPUT:
+    user_id - the user_id of an individual as int
+    min_rating - the minimum rating considered while still a movie is still a "like" and not a "dislike"
+    OUTPUT:
+    movies_liked - an array of movies the user has watched and liked
+    """
+
+    return movies_liked
+
+
+def movie_names(movie_ids):
+    """
+    INPUT
+    movie_ids - a list of movie_ids
+    OUTPUT
+    movies - a list of movie names associated with the movie_ids
+
+    """
+
+    return movie_lst
+
+
+def make_recommendations(user, num_recs=10):
+    """
+    INPUT:
+        user - (int) a user_id of the individual you want to make recommendations for
+        num_recs - (int) number of movies to return
+    OUTPUT:
+        recommendations - a list of movies - if there are "num_recs" recommendations return this many
+                          otherwise return the total number of recommendations available for the "user"
+                          which may just be an empty list
+    """
+
+    return recommendations
+
+
+def all_recommendations(num_recs=10):
+    """
+    INPUT
+        num_recs (int) the (max) number of recommendations for each user
+    OUTPUT
+        all_recs - a dictionary where each key is a user_id and the value is an array of recommended movie titles
+    """
+
+    # Make the recommendations for each user
+
+    return all_recs
+
+
+all_recs = all_recommendations(10)
+
+
 
