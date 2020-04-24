@@ -169,7 +169,7 @@ def find_closest_neighbors(user):
     # I treated ties as arbitrary and just kept whichever was easiest to keep using the head method
     # You might choose to do something less hand wavy - order the neighbors
 
-    closest_neighbors = df_dists[df_dists["user1"] == user].sort_values(by="eucl_dist")["user2"].tolist()
+    closest_neighbors = df_dists[df_dists["user1"] == user].sort_values(by="eucl_dist").iloc[1:]["user2"].tolist()
 
     return closest_neighbors
 

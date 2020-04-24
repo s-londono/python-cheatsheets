@@ -74,6 +74,10 @@ print(df_1[df_1['X'] >= -50.0]['Y'].iat[0])
 # Query a DataFrame using a boolean expression. Enclose names of columns that contain spaces in backtick quotes (`)
 print(df_1.query("W > X"))
 
+# Use @ to pass variables to the query
+x_val = 100
+print(df_1.query("W > @x_val and W > 0"))
+
 # MULTIPLE INDEXES
 
 outside = ['G1', 'G1', 'G1', 'G2', 'G2', 'G2']
