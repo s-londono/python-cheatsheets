@@ -73,6 +73,9 @@ del (l2[1])  # Remove the second element
 "a,b,c,d".split(",")
 print(1 in l1)  # Check if list contains item
 
+l4 = [*l1, *l2]  # This is the same as l4 = l1 + l2
+print(l4)
+
 # Clone a list:
 l3 = l2[:]
 

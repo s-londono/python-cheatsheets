@@ -43,4 +43,19 @@ for user_id, movie_recs in all_recs.items():
 # Create a dataframe similar to reviews, but ranked by rating for each user
 user_ranked_reviews = reviews.sort_values(by=["user_id", "rating"], ascending=False)
 
+# 3. Perform the dot product on a matrix of movies with content characteristics to provide a movie by movie matrix
+# where each cell is an indication of how similar two movies are to one another
+# Create a numpy array that is a matrix of indicator variables related to year (by century) and movie genres by movie.
+# Perform the dot product of this matrix with itself (transposed) to obtain a similarity matrix of each movie with
+# every other movie
+
+# 3.1 Subset so movie_content is only using the dummy variables for genres and the 3 century based year dummy columns
+movie_content = movies.loc[:, ["movie_id"] + movies.columns[4:].to_list()]
+movie_content.set_index("movie_id", drop=True, inplace=True)
+
+# 3.2 Take the dot product to obtain a movie x movie matrix of similarities
+movie_similarities = movie_content.dot(movie_content.transpose())
+
+dot_prod_movies = movie_similarities.to_numpy()
+
 
