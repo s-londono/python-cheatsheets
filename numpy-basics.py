@@ -113,3 +113,5 @@ np_sins = np.sin(np.arange(0, 10))
 gift_costs = np.arange(0, 100, 5)
 total_price = (gift_costs[gift_costs < 25]).sum() * 1.08
 
+# Where function. Works as a filter that extracts elements of the referenced array that match the boolean mask
+r = np.where(np.array([0, 1, 2, 3, 4]) >= 3)
