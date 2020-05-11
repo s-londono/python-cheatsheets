@@ -114,4 +114,9 @@ gift_costs = np.arange(0, 100, 5)
 total_price = (gift_costs[gift_costs < 25]).sum() * 1.08
 
 # Where function. Works as a filter that extracts elements of the referenced array that match the boolean mask
+# https://numpy.org/doc/stable/reference/generated/numpy.where.html#numpy.where
 r = np.where(np.array([0, 1, 2, 3, 4]) >= 3)
+
+# According to the documentation, passing just the condition is equivalent to:
+r1 = np.asarray(np.array([0, 1, 2, 3, 4]) >= 3).nonzero()
+
