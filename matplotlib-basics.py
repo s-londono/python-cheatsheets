@@ -14,7 +14,7 @@ y = x ** 2
 
 plt.plot(x, y)
 plt.xlabel('X Label')
-plt.ylabel('Y  Label')
+plt.ylabel('Y Label')
 plt.title('Title')
 plt.show()
 
