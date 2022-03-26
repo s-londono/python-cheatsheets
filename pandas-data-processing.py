@@ -230,3 +230,22 @@ df_data = df_data.astype({"a": "str", "b": "int64", "c": "float64"})
 
 df_melt2['year'] = df_melt2['year'].astype('datetime64[ns]').dt.year
 
+# UPDATING DATAFRAME CONTENTS
+# Method df.set_value('C', 'x', 10), is far and away faster. However, it has been slated for deprecation.
+# Going forward, the recommended method is .iat/.at.
+# https://re-thought.com/how-to-change-or-update-a-cell-value-in-python-pandas-dataframe/
+
+# Set cell values
+for ix, row in df_data.iterrows():
+    df_data.at[ix, 'a'] = f'a-updt-{ix}'
+
+# Set value of multiple cells
+df_data.at[0:3, 'a'] = '555'
+
+# DataFrame.loc[] - selects subsets of rows and columns by label only.
+for ix, row in df_data.iterrows():
+    df_data.loc[ix, 'a'] = f'a-updt-{ix}'
+
+# DataFrame.iloc - selects subsets of rows and columns by integer location only.
+for i, (ix, row) in enumerate(df_data.iterrows()):
+    df_data.loc[i, 'a'] = f'a-updt-{i}'
